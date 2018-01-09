@@ -259,6 +259,20 @@ public class Pool extends IndyJava.API {
 
 		return future;
 	}
+	
+	public static CompletableFuture<Void> listPool() throws IndyException{
+		CompletableFuture<Void> future = new CompletableFuture<Void>();
+		int commandHandle = addFuture(future);
+
+		int result = LibIndy.api.indy_list_pools(
+				commandHandle, 
+				deletePoolLedgerConfigCb);
+
+		checkResult(result);
+
+		return future;
+	}
+	
 
 	/*
 	 * INSTANCE METHODS
